@@ -1,0 +1,19 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocessing.py
+    deps:
+    - path: data/raw/wednesday.csv
+      hash: md5
+      md5: bf0dd7e9d991987df4e13ea58a1b409c
+      size: 225166395
+    - path: src/preprocessing.py
+      hash: md5
+      md5: 8387d904f818e7b091a8e3eb69ef5610
+      size: 1456
+    outs:
+    - path: data/processed
+      hash: md5
+      md5: 556eb418d92bf5ffdd13ad8980ea8dec.dir
+      size: 990627391
+      nfiles: 5
