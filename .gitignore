@@ -1,0 +1,9 @@
+venv/
+__pycache__/
+*.pyc
+
+# DVC cache (VERY IMPORTANT)
+.dvc/cache
+
+# Mac junk
+.DS_Store
