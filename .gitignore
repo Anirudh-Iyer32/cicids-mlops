@@ -7,3 +7,14 @@ __pycache__/
 
 # Mac junk
 .DS_Store
+/models
+
+# MLflow
+mlruns/
+mlflow.db
+
+# Models (already ignored, keep it)
+models/
+
+# Notebook checkpoints
+.ipynb_checkpoints/
