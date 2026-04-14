@@ -2,6 +2,8 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import joblib
 import numpy as np
+import pandas as pd
+import os
 
 app = FastAPI(title="CICIDS Intrusion Detection API")
 
@@ -9,10 +11,30 @@ app = FastAPI(title="CICIDS Intrusion Detection API")
 model = joblib.load("models/xgb_model.pkl")
 feature_names = joblib.load("data/processed/feature_names.pkl")
 
+# Path for logging live data
+LOG_FILE = "monitoring/live_data.csv"
+
 
 # Input schema
 class InputData(BaseModel):
     data: dict
+
+
+
+def log_input(data):
+    try:
+        df = pd.DataFrame([data])
+
+        # Ensure folder exists
+        os.makedirs("monitoring", exist_ok=True)
+
+        if not os.path.exists(LOG_FILE):
+            df.to_csv(LOG_FILE, index=False)
+        else:
+            df.to_csv(LOG_FILE, mode='a', header=False, index=False)
+
+    except Exception as e:
+        print(f"Logging failed: {e}")  # Don't break API if logging fails
 
 
 @app.get("/")
@@ -32,6 +54,9 @@ def predict(input_data: InputData):
                 status_code=400,
                 detail=f"Missing features: {missing_features}"
             )
+
+        
+        log_input(data)
 
         # Arrange features in correct order
         features = np.array([data[col] for col in feature_names]).reshape(1, -1)
