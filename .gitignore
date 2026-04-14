@@ -17,3 +17,6 @@ mlflow.db
 
 # Notebook checkpoints
 .ipynb_checkpoints/
+
+monitoring/*.csv
+monitoring/*.html
