@@ -13,8 +13,7 @@ __pycache__/
 mlruns/
 mlflow.db
 
-# Models (already ignored, keep it)
-models/
+
 
 # Notebook checkpoints
 .ipynb_checkpoints/
