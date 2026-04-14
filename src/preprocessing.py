@@ -41,6 +41,7 @@ def preprocess(input_path, output_dir):
     y_test.to_csv(f"{output_dir}/y_test.csv", index=False)
 
     joblib.dump(scaler, f"{output_dir}/scaler.pkl")
+    joblib.dump(X.columns.tolist(), "data/processed/feature_names.pkl")
 
     print("Preprocessing completed successfully!")
 
